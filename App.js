@@ -7,15 +7,14 @@
  */
 
 import React from 'react';
-import {View, StyleSheet, Text, Image} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
 const App = () => {
   return (
     <View style={styles.container}>
-      <Header title="Mobile App dev" />
-      <Text>Blockchain and healthcare</Text>
+      <Header title="Blockchain and healthcare" />
       <View style={styles.logoHolder}>
         <Image
           source={require('./assets/imgs/appLogo.jpg')}

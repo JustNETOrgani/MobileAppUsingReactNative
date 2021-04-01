@@ -7,12 +7,24 @@
  */
 
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet, Text, Image} from 'react-native';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 const App = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.appTitle}>Mobile App dev</Text>
+      <Header title="Mobile App dev" />
+      <Text>Blockchain and healthcare</Text>
+      <View style={styles.logoHolder}>
+        <Image
+          source={require('./assets/imgs/appLogo.jpg')}
+          style={styles.appLogoImg}
+        />
+      </View>
+      <View style={styles.footerHolder}>
+        <Footer title="Designed by: JustNET" />
+      </View>
     </View>
   );
 };
@@ -23,9 +35,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  appTitle: {
-    color: 'darkslateblue',
-    fontSize: 30,
+  logoHolder: {
+    flex: 3,
+    padding: 220,
+  },
+  appLogoImg: {
+    height: 120,
+    width: 120,
+    borderRadius: 120 / 2,
+  },
+  footerHolder: {
+    flex: 1,
   },
 });
 

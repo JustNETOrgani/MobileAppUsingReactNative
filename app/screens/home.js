@@ -43,6 +43,7 @@ const Home = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 5,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
     padding: 220,
   },
   appLogoImg: {
-    height: 120,
+    height: 110,
     width: 120,
     borderRadius: 120 / 2,
   },

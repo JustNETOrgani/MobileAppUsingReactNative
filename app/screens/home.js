@@ -7,13 +7,16 @@
  */
 
 import React from 'react';
-import {View, StyleSheet, Image, Button, Alert} from 'react-native';
+import {View, StyleSheet, Image, Button} from 'react-native';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 const Home = ({navigation}) => {
   const signInHandler = () => {
     navigation.navigate('Login');
+  };
+  const signUpHandler = () => {
+    navigation.navigate('signUp');
   };
   return (
     <View style={styles.container}>
@@ -29,7 +32,7 @@ const Home = ({navigation}) => {
           style={styles.btn}
           title="Sign up"
           color="#4682B4"
-          onPress={() => Alert.alert('Sign in button pressed')}
+          onPress={signUpHandler}
         />
         <Button style={styles.btn} title="Sign in" onPress={signInHandler} />
       </View>

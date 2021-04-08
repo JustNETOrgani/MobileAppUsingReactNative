@@ -16,7 +16,7 @@ const Home = ({navigation}) => {
     navigation.navigate('Login');
   };
   const signUpHandler = () => {
-    navigation.navigate('signUp');
+    navigation.navigate('SignUp');
   };
   return (
     <View style={styles.container}>

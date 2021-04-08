@@ -13,9 +13,8 @@ import colors from '../config/colors';
 const Login = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text_big}>Sign in screen</Text>
       <View style={styles.topSection}>
-        <Text style={styles.text_small}>Please fill the form below.</Text>
+        <Text style={styles.text_big}>Sign in screen</Text>
       </View>
       <View style={styles.bottomSection}>
         <Text

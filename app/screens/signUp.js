@@ -9,6 +9,7 @@ import {
   Platform,
 } from 'react-native';
 import colors from '../config/colors';
+import * as Animatable from 'react-native-animatable';
 
 const SignUp = ({navigation}) => {
   const [username, setUsername] = useState('');
@@ -43,7 +44,7 @@ const SignUp = ({navigation}) => {
       <View style={styles.topSection}>
         <Text style={styles.text_small}>Please fill the form below.</Text>
       </View>
-      <View style={styles.bottomSection}>
+      <Animatable.View style={styles.bottomSection} animation="fadeInUpBig">
         <Text
           style={[
             styles.text_small,
@@ -125,7 +126,7 @@ const SignUp = ({navigation}) => {
             onPress={() => signInHandler()}
           />
         </View>
-      </View>
+      </Animatable.View>
     </View>
   );
 };

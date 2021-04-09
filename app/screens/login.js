@@ -10,6 +10,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import colors from '../config/colors';
+import * as Animatable from 'react-native-animatable';
 
 const Login = ({navigation}) => {
   const [username, setUsername] = useState('');
@@ -60,10 +61,10 @@ const Login = ({navigation}) => {
   };
   return (
     <View style={styles.container}>
-      <View style={styles.topSection}>
+      <Animatable.View style={styles.topSection} animation="fadeInDownBig">
         <Text style={styles.text_big}>Sign in screen</Text>
-      </View>
-      <View style={styles.bottomSection}>
+      </Animatable.View>
+      <Animatable.View style={styles.bottomSection} animation="fadeInUpBig">
         <Text
           style={[
             styles.text_small,
@@ -145,7 +146,7 @@ const Login = ({navigation}) => {
             onPress={() => signUpHandler()}
           />
         </View>
-      </View>
+      </Animatable.View>
     </View>
   );
 };

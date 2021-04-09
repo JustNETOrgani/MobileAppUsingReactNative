@@ -8,10 +8,11 @@
  */
 
 import React from 'react';
-import {View, StyleSheet, Image, Text, Button} from 'react-native';
+import {View, StyleSheet, Text, Button} from 'react-native';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import colors from '../config/colors';
+import * as Animatable from 'react-native-animatable';
 
 const Home = ({navigation}) => {
   const signInHandler = () => {
@@ -24,7 +25,8 @@ const Home = ({navigation}) => {
     <View style={styles.container}>
       <Header title="Blockchain and healthcare" />
       <View style={styles.logoHolder}>
-        <Image
+        <Animatable.Image
+          animation="bounceIn"
           source={require('../assets/imgs/appLogo.jpg')}
           style={styles.appLogoImg}
         />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -11,6 +11,34 @@ import {
 import colors from '../config/colors';
 
 const Login = ({navigation}) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const sendSignInCredentials = () => {
+    // console.log(username, password);
+    const backendURLforSignUp = 'http://10.0.2.2:8000/app/login';
+    fetch(backendURLforSignUp, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json, text/plain, */*', // To be used to overcome cors errors
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    })
+      .then(res => res.json())
+      .then(data => {
+        const numOfKeys = Object.keys(data);
+        console.log('Number of keys: ', numOfKeys);
+        if (numOfKeys.length < 2) {
+          Alert.alert('Sign in failed!');
+        } else {
+          Alert.alert('Sign in successful');
+        }
+      });
+  };
   const signUpHandler = () => {
     navigation.navigate('SignUp');
   };
@@ -33,12 +61,14 @@ const Login = ({navigation}) => {
           <TextInput
             placeholder="Your Username"
             placeholderTextColor="#666666"
+            value={username}
             style={[
               styles.textInput,
               {
                 color: colors.fieldColors,
               },
             ]}
+            onChangeText={text => setUsername(text)}
             autoCapitalize="none"
           />
         </View>
@@ -58,12 +88,14 @@ const Login = ({navigation}) => {
             placeholder="Your Password"
             placeholderTextColor="#666666"
             secureTextEntry={true}
+            value={password}
             style={[
               styles.textInput,
               {
                 color: colors.fieldColors,
               },
             ]}
+            onChangeText={text => setPassword(text)}
             autoCapitalize="none"
           />
         </View>
@@ -71,7 +103,7 @@ const Login = ({navigation}) => {
           <Button
             title="Sign in"
             color="#4682B4"
-            onPress={() => Alert.alert('Sign in button pressed')}
+            onPress={() => sendSignInCredentials()}
           />
           <Text
             style={[

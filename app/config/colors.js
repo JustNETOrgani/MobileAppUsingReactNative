@@ -11,4 +11,6 @@ export default {
   textHomeHeader: '#FFF5EE',
   // Specific colors
   fieldColors: 'darkslateblue',
+  // Loading indicator
+  loadingStateColor: '#7B68EE',
 };

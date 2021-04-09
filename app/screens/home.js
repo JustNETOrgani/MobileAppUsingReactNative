@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -7,9 +8,10 @@
  */
 
 import React from 'react';
-import {View, StyleSheet, Image, Button} from 'react-native';
+import {View, StyleSheet, Image, Text, Button} from 'react-native';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import colors from '../config/colors';
 
 const Home = ({navigation}) => {
   const signInHandler = () => {
@@ -26,18 +28,22 @@ const Home = ({navigation}) => {
           source={require('../assets/imgs/appLogo.jpg')}
           style={styles.appLogoImg}
         />
+        <Text style={styles.text_small_italiced}>
+          Transforming the health sector
+        </Text>
       </View>
-      <View style={styles.btnHolder}>
-        <Button
-          style={styles.btn}
-          title="Sign up"
-          color="#4682B4"
-          onPress={signUpHandler}
-        />
-        <Button style={styles.btn} title="Sign in" onPress={signInHandler} />
-      </View>
-      <View style={styles.footerHolder}>
-        <Footer title="Designed by: JustNET" />
+      <View style={styles.bottomView}>
+        <View style={styles.bottomGroup}>
+          <View style={{marginRight: 15}}>
+            <Button title="Sign up" color="#4682B4" onPress={signUpHandler} />
+          </View>
+          <View>
+            <Button title="Sign in" onPress={signInHandler} />
+          </View>
+        </View>
+        <View style={styles.footerHolder}>
+          <Footer title="Designed by: JustNET" />
+        </View>
       </View>
     </View>
   );
@@ -46,24 +52,36 @@ const Home = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: colors.containerBackground,
   },
   logoHolder: {
-    padding: 220,
+    flex: 3,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   appLogoImg: {
     height: 110,
     width: 120,
     borderRadius: 120 / 2,
   },
-  btnHolder: {
+  text_small_italiced: {
+    color: '#05375a',
+    fontSize: 21,
+    fontStyle: 'italic',
+    marginTop: 13,
+  },
+  bottomView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  bottomGroup: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    marginLeft: 20,
+    justifyContent: 'space-evenly',
   },
   btn: {
-    marginRight: 10,
+    paddingRight: 10,
   },
 });
 

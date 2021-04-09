@@ -34,8 +34,8 @@ const SignUp = ({navigation}) => {
         Alert.alert('User successfully created');
       });
   };
-  const goBack = () => {
-    navigation.pop();
+  const signInHandler = () => {
+    navigation.navigate('Login');
   };
   return (
     <View style={styles.container}>
@@ -122,7 +122,7 @@ const SignUp = ({navigation}) => {
             ]}
             title="Sign in"
             color="#9370DB"
-            onPress={() => goBack()}
+            onPress={() => signInHandler()}
           />
         </View>
       </View>

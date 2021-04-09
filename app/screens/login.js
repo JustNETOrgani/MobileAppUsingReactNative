@@ -10,7 +10,10 @@ import {
 } from 'react-native';
 import colors from '../config/colors';
 
-const Login = () => {
+const Login = ({navigation}) => {
+  const signUpHandler = () => {
+    navigation.navigate('SignUp');
+  };
   return (
     <View style={styles.container}>
       <View style={styles.topSection}>
@@ -91,7 +94,7 @@ const Login = () => {
             ]}
             title="Sign up"
             color="#9370DB"
-            onPress={() => Alert.alert('Sign up button pressed')}
+            onPress={() => signUpHandler()}
           />
         </View>
       </View>

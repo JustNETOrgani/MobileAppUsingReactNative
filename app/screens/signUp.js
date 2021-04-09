@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import colors from '../config/colors';
 
-const SignUp = () => {
+const SignUp = ({navigation}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -33,6 +33,9 @@ const SignUp = () => {
         // console.log(data);
         Alert.alert('User successfully created');
       });
+  };
+  const goBack = () => {
+    navigation.pop();
   };
   return (
     <View style={styles.container}>
@@ -119,7 +122,7 @@ const SignUp = () => {
             ]}
             title="Sign in"
             color="#9370DB"
-            onPress={() => Alert.alert('Sign in button pressed')}
+            onPress={() => goBack()}
           />
         </View>
       </View>

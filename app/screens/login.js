@@ -31,7 +31,6 @@ const Login = ({navigation}) => {
       .then(res => res.json())
       .then(data => {
         const numOfKeys = Object.keys(data);
-        console.log('Number of keys: ', numOfKeys);
         if (numOfKeys.length < 2) {
           Alert.alert('Sign in failed!');
         } else {

@@ -18,14 +18,12 @@ Footer.defaultProps = {
 //rnss
 const styles = StyleSheet.create({
   footer: {
-    height: 60,
-    width: 400,
-    padding: 15,
+    padding: 25,
     backgroundColor: colors.footerBackground,
   },
   footerText: {
     color: colors.textFooter,
-    fontSize: 12,
+    fontSize: 16,
     textAlign: 'center',
     fontStyle: 'italic',
   },

@@ -18,15 +18,12 @@ Header.defaultProps = {
 //rnss
 const styles = StyleSheet.create({
   header: {
-    height: 60,
-    width: 400,
     padding: 14,
-    backgroundColor: colors.headerBackground,
   },
   headerText: {
-    color: colors.textHeader,
-    fontSize: 20,
     textAlign: 'center',
+    color: colors.textHomeHeader,
+    fontSize: 30,
   },
 });
 

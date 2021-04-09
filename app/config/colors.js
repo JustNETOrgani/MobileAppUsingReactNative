@@ -8,6 +8,7 @@ export default {
   textHeader: '#fff',
   textFooter: '#fff',
   textLoginGreeting: 'darkslateblue',
+  textHomeHeader: '#FFF5EE',
   // Specific colors
   fieldColors: 'darkslateblue',
 };

@@ -7,15 +7,22 @@ import {
   Platform,
   Button,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import colors from '../config/colors';
 
 const Login = ({navigation}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loadingState, setLoadingState] = useState(false);
 
   const sendSignInCredentials = () => {
     // console.log(username, password);
+    <ActivityIndicator
+      size="large"
+      color={colors.loadingStateColor}
+      animating={setLoadingState(!loadingState)}
+    />;
     const backendURLforSignUp = 'http://10.0.2.2:8000/app/login';
     fetch(backendURLforSignUp, {
       method: 'POST',
@@ -32,8 +39,18 @@ const Login = ({navigation}) => {
       .then(data => {
         const numOfKeys = Object.keys(data);
         if (numOfKeys.length < 2) {
+          <ActivityIndicator
+            size="large"
+            color={colors.loadingStateColor}
+            animating={setLoadingState(!loadingState)}
+          />;
           Alert.alert('Sign in failed!');
         } else {
+          <ActivityIndicator
+            size="large"
+            color={colors.loadingStateColor}
+            animating={setLoadingState(!loadingState)}
+          />;
           Alert.alert('Sign in successful');
         }
       });

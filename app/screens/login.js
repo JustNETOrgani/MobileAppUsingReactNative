@@ -14,50 +14,100 @@ import colors from '../config/colors';
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 // import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Feather from 'react-native-vector-icons/Feather';
 
 const Login = ({navigation}) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
   const [loadingState, setLoadingState] = useState(false);
+  const [data, setData] = useState({
+    username: '',
+    password: '',
+    checkTextInputChange: false,
+    checkPwdInputChange: false,
+    secureTextEntry: true,
+  });
+
+  const setUsername = val => {
+    if (val.length !== 0) {
+      setData({
+        ...data,
+        username: val,
+        checkTextInputChange: true,
+      });
+    } else {
+      setData({
+        ...data,
+        username: val,
+        checkTextInputChange: false,
+      });
+    }
+  };
+
+  const setPassword = val => {
+    if (val.length !== 0) {
+      setData({
+        ...data,
+        password: val,
+        checkPwdInputChange: true,
+      });
+    } else {
+      setData({
+        ...data,
+        password: val,
+        checkPwdInputChange: false,
+      });
+    }
+  };
+
+  const updateSecureTextEntry = () => {
+    setData({
+      ...data,
+      secureTextEntry: !data.secureTextEntry,
+    });
+  };
 
   const sendSignInCredentials = () => {
     // console.log(username, password);
-    <ActivityIndicator
-      size="large"
-      color={colors.loadingStateColor}
-      animating={setLoadingState(!loadingState)}
-    />;
-    const backendURLforSignUp = 'http://10.0.2.2:8000/app/login';
-    fetch(backendURLforSignUp, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json, text/plain, */*', // To be used to overcome cors errors
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: username,
-        password: password,
-      }),
-    })
-      .then(res => res.json())
-      .then(data => {
-        const numOfKeys = Object.keys(data);
-        if (numOfKeys.length < 2) {
-          <ActivityIndicator
-            size="large"
-            color={colors.loadingStateColor}
-            animating={setLoadingState(!loadingState)}
-          />;
-          Alert.alert('Sign in failed!');
-        } else {
-          <ActivityIndicator
-            size="large"
-            color={colors.loadingStateColor}
-            animating={setLoadingState(!loadingState)}
-          />;
-          Alert.alert('Sign in successful');
-        }
-      });
+    if (data.username.length !== 0 && data.password.length !== 0) {
+      <ActivityIndicator
+        size="large"
+        color={colors.loadingStateColor}
+        animating={setLoadingState(!loadingState)}
+      />;
+      const backendURLforSignUp = 'http://10.0.2.2:8000/app/login';
+      fetch(backendURLforSignUp, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json, text/plain, */*', // To be used to overcome cors errors
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: data.username,
+          password: data.password,
+        }),
+      })
+        .then(res => res.json())
+        .then(dataRes => {
+          const numOfKeys = Object.keys(dataRes);
+          if (numOfKeys.length < 2) {
+            <ActivityIndicator
+              size="large"
+              color={colors.loadingStateColor}
+              animating={setLoadingState(!loadingState)}
+            />;
+            Alert.alert('Sign in failed!');
+          } else {
+            <ActivityIndicator
+              size="large"
+              color={colors.loadingStateColor}
+              animating={setLoadingState(!loadingState)}
+            />;
+            Alert.alert('Sign in successful');
+          }
+        });
+    } else {
+      Alert.alert('Sorry! Username or password field cannot be empty.');
+    }
   };
   const signUpHandler = () => {
     navigation.navigate('SignUp');
@@ -78,10 +128,11 @@ const Login = ({navigation}) => {
           Username
         </Text>
         <View style={styles.action}>
+          <FontAwesome name="user-o" color="#05375a" size={20} />
           <TextInput
             placeholder="Your Username"
             placeholderTextColor="#666666"
-            value={username}
+            value={data.username}
             style={[
               styles.textInput,
               {
@@ -91,6 +142,11 @@ const Login = ({navigation}) => {
             onChangeText={text => setUsername(text)}
             autoCapitalize="none"
           />
+          {data.checkTextInputChange ? (
+            <Animatable.View animation="bounceIn">
+              <Feather name="check-circle" color="green" size={20} />
+            </Animatable.View>
+          ) : null}
         </View>
         <Text
           style={[
@@ -104,11 +160,12 @@ const Login = ({navigation}) => {
           Password
         </Text>
         <View style={styles.action}>
+          <FontAwesome name="lock" color="#05375a" size={20} />
           <TextInput
             placeholder="Your Password"
             placeholderTextColor="#666666"
-            secureTextEntry={true}
-            value={password}
+            secureTextEntry={data.secureTextEntry ? true : false}
+            value={data.password}
             style={[
               styles.textInput,
               {
@@ -118,6 +175,11 @@ const Login = ({navigation}) => {
             onChangeText={text => setPassword(text)}
             autoCapitalize="none"
           />
+          {data.checkPwdInputChange ? (
+            <TouchableOpacity onPress={updateSecureTextEntry}>
+              <Feather name="eye-off" color="grey" size={20} />
+            </TouchableOpacity>
+          ) : null}
         </View>
         <View>
           <Button

@@ -10,10 +10,59 @@ import {
 } from 'react-native';
 import colors from '../config/colors';
 import * as Animatable from 'react-native-animatable';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Feather from 'react-native-vector-icons/Feather';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const SignUp = ({navigation}) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  // const [username, setUsername] = useState('');
+  // const [password, setPassword] = useState('');
+  const [data, setData] = useState({
+    username: '',
+    password: '',
+    checkTextInputChange: false,
+    checkPwdInputChange: false,
+    secureTextEntry: true,
+  });
+
+  const setUsername = val => {
+    if (val.length !== 0) {
+      setData({
+        ...data,
+        username: val,
+        checkTextInputChange: true,
+      });
+    } else {
+      setData({
+        ...data,
+        username: val,
+        checkTextInputChange: false,
+      });
+    }
+  };
+
+  const setPassword = val => {
+    if (val.length !== 0) {
+      setData({
+        ...data,
+        password: val,
+        checkPwdInputChange: true,
+      });
+    } else {
+      setData({
+        ...data,
+        password: val,
+        checkPwdInputChange: false,
+      });
+    }
+  };
+
+  const updateSecureTextEntry = () => {
+    setData({
+      ...data,
+      secureTextEntry: !data.secureTextEntry,
+    });
+  };
 
   const sendSignUpCredentials = () => {
     // console.log(username, password);
@@ -25,13 +74,13 @@ const SignUp = ({navigation}) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        username: username,
-        password: password,
+        username: data.username,
+        password: data.password,
       }),
     })
       .then(res => res.json())
-      .then(data => {
-        // console.log(data);
+      .then(dataRes => {
+        // console.log(dataRes);
         Alert.alert('User successfully created');
       });
   };
@@ -55,10 +104,11 @@ const SignUp = ({navigation}) => {
           Username
         </Text>
         <View style={styles.action}>
+          <FontAwesome name="user-o" color="#05375a" size={20} />
           <TextInput
             placeholder="Your Username"
             placeholderTextColor="#666666"
-            value={username}
+            value={data.username}
             style={[
               styles.textInput,
               {
@@ -68,6 +118,11 @@ const SignUp = ({navigation}) => {
             onChangeText={text => setUsername(text)}
             autoCapitalize="none"
           />
+          {data.checkTextInputChange ? (
+            <Animatable.View animation="bounceIn">
+              <Feather name="check-circle" color="green" size={20} />
+            </Animatable.View>
+          ) : null}
         </View>
         <Text
           style={[
@@ -81,20 +136,26 @@ const SignUp = ({navigation}) => {
           Password
         </Text>
         <View style={styles.action}>
+          <FontAwesome name="lock" color="#05375a" size={20} />
           <TextInput
             placeholder="Your Password"
             placeholderTextColor="#666666"
-            value={password}
-            secureTextEntry={true}
+            value={data.password}
+            secureTextEntry={data.secureTextEntry ? true : false}
             style={[
               styles.textInput,
               {
                 color: colors.fieldColors,
               },
             ]}
-            onChangeText={text => setPassword(text)}
+            onChangeText={val => setPassword(val)}
             autoCapitalize="none"
           />
+          {data.checkPwdInputChange ? (
+            <TouchableOpacity onPress={updateSecureTextEntry}>
+              <Feather name="eye-off" color="grey" size={20} />
+            </TouchableOpacity>
+          ) : null}
         </View>
         <View>
           <Button

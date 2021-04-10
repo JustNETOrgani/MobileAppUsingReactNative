@@ -15,8 +15,6 @@ import Feather from 'react-native-vector-icons/Feather';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const SignUp = ({navigation}) => {
-  // const [username, setUsername] = useState('');
-  // const [password, setPassword] = useState('');
   const [data, setData] = useState({
     username: '',
     password: '',

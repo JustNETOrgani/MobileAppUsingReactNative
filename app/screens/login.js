@@ -8,9 +8,12 @@ import {
   Button,
   Alert,
   ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
 import colors from '../config/colors';
 import * as Animatable from 'react-native-animatable';
+import LinearGradient from 'react-native-linear-gradient';
+// import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const Login = ({navigation}) => {
   const [username, setUsername] = useState('');
@@ -133,18 +136,19 @@ const Login = ({navigation}) => {
             ]}>
             Don't have an account?
           </Text>
-          <Button
-            style={[
-              styles.btn,
-              // eslint-disable-next-line react-native/no-inline-styles
-              {
-                marginTop: 25,
-              },
-            ]}
-            title="Sign up"
-            color="#9370DB"
-            onPress={() => signUpHandler()}
-          />
+          <Animatable.View
+            style={styles.designedBtnHolder}
+            animation="pulse"
+            easing="ease-out"
+            iterationCount="infinite">
+            <TouchableOpacity onPress={() => signUpHandler()}>
+              <LinearGradient
+                colors={['#7B68EE', '#9370DB']}
+                style={styles.btn}>
+                <Text style={styles.textSign}>Sign up</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </Animatable.View>
         </View>
       </Animatable.View>
     </View>
@@ -197,8 +201,23 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     color: '#05375a',
   },
+  designedBtnHolder: {
+    alignItems: 'flex-end',
+    marginTop: 30,
+  },
   btn: {
-    marginTop: 4,
+    width: 150,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 50,
+    flexDirection: 'row',
+    marginTop: 10,
+  },
+  textSign: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 17,
   },
 });
 

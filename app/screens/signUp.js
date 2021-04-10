@@ -66,23 +66,27 @@ const SignUp = ({navigation}) => {
 
   const sendSignUpCredentials = () => {
     // console.log(username, password);
-    const backendURLforSignUp = 'http://10.0.2.2:8000/app/signUp';
-    fetch(backendURLforSignUp, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json, text/plain, */*', // To be used to overcome cors errors
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: data.username,
-        password: data.password,
-      }),
-    })
-      .then(res => res.json())
-      .then(dataRes => {
-        // console.log(dataRes);
-        Alert.alert('User successfully created');
-      });
+    if (data.username.length !== 0 && data.password.length !== 0) {
+      const backendURLforSignUp = 'http://10.0.2.2:8000/app/signUp';
+      fetch(backendURLforSignUp, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json, text/plain, */*', // To be used to overcome cors errors
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: data.username,
+          password: data.password,
+        }),
+      })
+        .then(res => res.json())
+        .then(dataRes => {
+          // console.log(dataRes);
+          Alert.alert('User successfully created');
+        });
+    } else {
+      Alert.alert('Sorry! Username or password cannot be empty.');
+    }
   };
   const signInHandler = () => {
     navigation.navigate('Login');
